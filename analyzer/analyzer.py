@@ -7,6 +7,8 @@ import random
 import matplotlib.pyplot as plt
 from collections import defaultdict, Counter
 from scipy.ndimage import gaussian_gradient_magnitude
+import extract_clean
+import seg
 
 
 def create_stopwords(path):
@@ -14,7 +16,8 @@ def create_stopwords(path):
         stop = set([line.rstrip('\n') for line in f])
     stop.update(['二手', '一个', ' ', '一起', '一起去', '一起玩', '伙伴', '小伙伴', '喜欢', '朋友', '玩',
                  '租', '附近', '日本', '地方', '有没有', '找', '一只', '回国', '回', '近期', '飞', '带',
-                 '帮带', '最近', '东西', '前辈', '专业', '学校', '学', '店', '东京'])
+                 '帮带', '最近', '东西', '前辈', '专业', '学校', '学', '店', '东京',
+                 '左右', '最好'])
     return stop
 
 
@@ -59,6 +62,8 @@ def freAna(data):
 
 
 if __name__ == "__main__":
+    extract_clean.main()
+    seg.main()
     data = util.read_data('../data/seg.json')
     fre_d = freAna(data)
     for i, k in enumerate(util.CATEGORY):
